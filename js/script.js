@@ -11,13 +11,15 @@ function showPage(pageNumber, studentList){ // Displays a list of 10 students ba
     students[i].style.display = 'none';  // after the first 10
   }
 
-  pagination();
 
+
+  pagination();
 }
 
 function appendPageLinks() { // Creates the links to the different lists
 
 }
+
 
 function pagination() {
   var students = document.getElementsByClassName('student-item');
@@ -26,10 +28,16 @@ function pagination() {
 
   var html = '<ul>';
 
-  for(i = 0 ; i< numberOfPages ; i++){
+  for(i = 1 ; i< numberOfPages ; i++){
     html += '<li><a href="#">' + i + '</a></li>';
   }
   html += '</ul>';
 
   paginationArea.innerHTML = html;
 }
+
+$('.pagination').click( () => { // Listen to the pagination for filtering purposes
+    var test = $(this).text();
+    console.log(':::',test);
+
+  });
