@@ -2,36 +2,47 @@
 
 var students = document.getElementsByClassName('student-item');
 var studentsNames = document.querySelectorAll('.student-details h3');
-var numberOfPages = Math.ceil(students.length/10);
+var paginationArea = document.querySelector('.pagination');
 
+
+
+var listenToPage = function appendPageLinks(listOfStudents) { /* take a student list as an argument */
+  var html = pagination();
+
+    paginationArea.innerHTML = '';
+
+  showPage(1);
+};
 
 
 
 function showPage(pageNumber, studentsList){ // Displays a list of 10 students based on page-number selected
+  // first hide all students on the page. CHECK
+  // Then loop through all students in our student list argument
+      // if student should be on this page number
+          // show the student
 
-  for(i = 10; i < students.length; i++){ // This for just hide everyone on the page using th stunde-iten class
-    students[i].style.display = 'none';  // after the first 10
+
+
+  var superiorLimit = pageNumber*10;
+
+  for(i = 0; i < students.length; i++){ // This for just hide everyone on the page using th stunde-iten class
+    students[i].style.display = 'none';
   }
 
-  pagination();
+  // for(i = 0; i < studentsList.length; i++){ // This loops through all students in our student list argument
+  //   //if(studentsList.name ===)
+  //
+  // }
+
+
+
 }
 
-function appendPageLinks() { // Creates the links to the different lists
-
-}
-
-function createList() {
-
-  var studentsList = [];
-  for(i = 0 ; i < studentsNames.length ; i++){
-
-  }
-  return studentsList;
-}
 
 function pagination() {
+  var numberOfPages = Math.ceil(students.length/10);
 
-  var paginationArea = document.querySelector('.pagination');
 
   var html = '<ul>';
 
@@ -40,14 +51,10 @@ function pagination() {
   }
   html += '</ul>';
 
-  paginationArea.innerHTML = html;
+  return html;
 }
 
-$('.pagination').click( () => { // Listen to the pagination for filtering purposes
-    var test = $(this).text();
-    console.log(':::',test);
-
-  });
 
 
-setTimeout(showPage, 1000); // just a caller for testing;
+  debugger;
+setTimeout(listenToPage(students), 3000); // just a caller for testing;
