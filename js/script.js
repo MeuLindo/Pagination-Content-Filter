@@ -6,6 +6,9 @@ var studentsNames = document.querySelectorAll('.student-details h3');
 var paginationArea = document.querySelector('.pagination');
 
 $( document ).ready(function() {
+  for(i = 10; i < students.length; i++){ // This for just hide everyone on the page using th stunde-iten class
+    students[i].style.display = 'none';  // after the first 10
+  }
     listenToPage(students);
     $(".pagination li:first-child a").addClass("active");
 });
@@ -36,7 +39,7 @@ var listenToPage = function appendPageLinks(listOfStudents) { /* take a student 
 function showPage(pageNumber, studentsList){
 
   var superiorLimit = pageNumber*10;
-  var inferiorLimit = superiorLimit - 9;
+  var inferiorLimit = superiorLimit - 10;
 
   for(i = 0; i < studentsList.length; i++){ // This for just hide everyone on the page using th stunde-iten class
     students[i].style.display = 'none';
