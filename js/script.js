@@ -17,7 +17,7 @@ function appendPageLinks(listOfStudents) { /* take a student list as an argument
   var numberOfPages = Math.ceil(students.length/10); // determine how many pages for this student list
   var html = '<ul>'; // create a page link section
 
-  for(var i = 1 ; i< numberOfPages ; i++){  // “for” every page add a page link to the page link section
+  for(var i = 1 ; i< numberOfPages + 1 ; i++){  // “for” every page add a page link to the page link section
     html += '<li><a href="#">' + i + '</a></li>';
   }
   html += '</ul>';
@@ -56,9 +56,11 @@ function showPage(pageNumber, studentsList){ //recieves the link clicked and a l
 
 $('#button').click(function(){
   var studentSearched = $('#studentName').val();
+  var name = $('.student-item h3').val;
   $('.pagination').remove();
   console.log(studentSearched)
   for(var i = 0; i < students.length; i++ ){
+
     console.log($('h3').val());
   }
 
