@@ -12,12 +12,12 @@
 * Needs Work
   * ~~No links appear for pagination, pagination is hard coded, or the incorrect number of links are displayed.~~
 * Meets Expectations
-  * Pagination links are created. If there are 44 students, 5 links should be generated, if there’s 66, 7 links should be generated.
-* Exceeds Expectations :white_check_mark:
+  * Pagination links are created. If there are 44 students, 5 links should be generated, if there’s 66, 7 links should be generated. :white_check_mark:
+* Exceeds Expectations
   * Pagination links display based on how many search results are returned. For example: if 10 or fewer results are returned, 0 pagination links are displayed. If 22 search results are returned, 3 pagination links are displayed.
 ## Paging
 * Needs Work
-  * The first 10 students aren’t shown when the page loads.
+  * ~~The first 10 students aren’t shown when the page loads.~~
   * ~~Nothing happens when the links are clicked, or the incorrect number of students are displayed.~~
 * Meets Expectations
   * The first 10 students are shown when the page loads, and each pagination link displays the correct students. :white_check_mark:
