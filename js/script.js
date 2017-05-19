@@ -54,10 +54,12 @@ function showPage(pageNumber, studentsList){ //recieves the link clicked and a l
 
 
 
+$('#button').click(function(){
+  var studentSearched = $('#studentName').val();
+  $('.pagination').remove();
+  console.log(studentSearched)
+  for(var i = 0; i < students.length; i++ ){
+    console.log($('h3').val());
+  }
 
-  $('#search-form').submit(function (event){
-    console.log(event.value);
-    debugger;
-
-
-  });
+});
