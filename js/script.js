@@ -5,15 +5,15 @@ var students = document.getElementsByClassName('student-item');
 var studentsNames = document.querySelectorAll('.student-details h3');
 var paginationArea = document.querySelector('.pagination');
 
-$( document ).ready(function() {
-  for(i = 10; i < students.length; i++){ // This for just hide everyone on the page using th stunde-iten class
-    students[i].style.display = 'none';  // after the first 10
+$( document ).ready(function() { //loads the first 10 students when document is first load.
+  for(i = 10; i < students.length; i++){ // This for just hide everyone on the page using the student-iten class
+    students[i].style.display = 'none';  // Chages the CSS prop 'display' to none
   }
-    listenToPage(students);
-    $(".pagination li:first-child a").addClass("active");
+    appendPageLinks(students);
+    $(".pagination li:first-child a").addClass("active"); //sets the link 1 class to active
 });
 
-var listenToPage = function appendPageLinks(listOfStudents) { /* take a student list as an argument */
+function appendPageLinks(listOfStudents) { /* take a student list as an argument */
   var numberOfPages = Math.ceil(students.length/10); // determine how many pages for this student list
   var html = '<ul>'; // create a page link section
 
@@ -21,14 +21,14 @@ var listenToPage = function appendPageLinks(listOfStudents) { /* take a student 
     html += '<li><a href="#">' + i + '</a></li>';
   }
   html += '</ul>';
-  paginationArea.innerHTML = html;
+  paginationArea.innerHTML = html; //inserts the pagination to the html.
 
 
-  $('.pagination a').click(function(){
+  $('.pagination a').click(function(){ //listens to clicks on the pagination area
 
-    $('.active').removeClass('active');
-    $(this).addClass('active');
-    showPage(this.text, listOfStudents);
+    $('.active').removeClass('active'); //Removes every link that has the active class
+    $(this).addClass('active'); //Adds the active class to the link clicked
+    showPage(this.text, listOfStudents); //Calls showPage() that print accordingly to the link
 
   })
 
@@ -36,9 +36,9 @@ var listenToPage = function appendPageLinks(listOfStudents) { /* take a student 
 
 
 
-function showPage(pageNumber, studentsList){
+function showPage(pageNumber, studentsList){ //recieves the link clicked and a list of all the students
 
-  var superiorLimit = pageNumber*10;
+  var superiorLimit = pageNumber*10; // The math to position the students to be selected
   var inferiorLimit = superiorLimit - 10;
 
   for(i = 0; i < studentsList.length; i++){ // This for just hide everyone on the page using th stunde-iten class
@@ -46,8 +46,18 @@ function showPage(pageNumber, studentsList){
   }
 
    for( ; superiorLimit >= inferiorLimit; superiorLimit--){
-     console.log(superiorLimit);
+
      students[superiorLimit].style.display = 'block';
 
    }
 }
+
+
+
+
+  $('#search-form').submit(function (event){
+    console.log(event.value);
+    debugger;
+
+
+  });
