@@ -1,18 +1,22 @@
 //Pagination & Content Filter
 
 
-var students = document.getElementsByClassName('student-item'); // Every student in the page. Used to first page load.
+var students = $('.student-item'); // Every student in the page. Used to first page load.
 var paginationArea = document.querySelector('.pagination'); // Used to first page load.
 
-$( document ).ready(function() { //loads functions when the page loads
+function loadsPage() { //Loads index page
   for(i = 10; i < students.length; i++){ // This for just hide everyone on the page, but the first 10 students, using the student-iten class
     students[i].style.display = 'none';  // Chages the CSS prop 'display' to none
   }
+  var paginationArea = $('.page-header h2::after');
+
+  paginationArea.innerHTML = '<div class="student-search"><input placeholder="Search for students..."><button>Search</button></div>';
     appendPageLinks(students); //Create the pagination links for all the students
+
     $(".pagination li:first-child a").addClass("active"); //sets the link 1 class to active
 
     searchList(); // Loads the searchbox
-});
+};
 
 function appendPageLinks(listOfStudents) { /* take a student list as an argument */
   var numberOfPages = Math.ceil(listOfStudents.length/10); // determine how many pages for this student list
@@ -53,10 +57,10 @@ function showPage(pageNumber, studentsList){ //recieves the link clicked and a l
      else studentsList[superiorLimit].style.display = 'block'; // Display the students
 
    }
+  if (pageNumber === 1){} // if page number = 0 we dont need to show the paginationArea
+  else appendPageLinks(studentsList); // create the paginationArea
 
-   appendPageLinks(studentsList); // create the paginationArea
-
-}
+};
 
 
 function searchList() { //Rearange the students based on user query
@@ -65,7 +69,6 @@ function searchList() { //Rearange the students based on user query
 
     var $studentSearched = $('input').val(); // Search text input
     var studentsFound = []; // array for the students found
-    //console.log($studentSearched);
 
     $('.pagination a').remove(); // Remove pagination, so we can create the new one with the size of the results
 
@@ -74,20 +77,15 @@ function searchList() { //Rearange the students based on user query
         if(students[i].innerText.indexOf($studentSearched) >= 0){ //indexOf returns the position in the array of the $studentSearched checking with every student in the page.
           studentsFound.push(students[i]); // pushes the student found to an array
         }
-        //console.log(studentsFound);
       }
 
       if(!studentsFound.length) { //sends a message to the user that no one was found
         alert('No one found :(');
       }
       else if(studentsFound.length > 10){ //checks if we need more pages
-        //console.log('>10');
-        //console.log(studentsFound);
         appendPageLinks(studentsFound);
       }
       else{ // case for students found but we dont need more the one page.
-        //console.log('showpage');
-        //console.log(studentsFound);
         showPage(1,studentsFound);
       }
 
@@ -95,3 +93,5 @@ function searchList() { //Rearange the students based on user query
 
 
 };
+
+loadsPage(); //Loads index page
