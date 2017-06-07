@@ -2,11 +2,11 @@
 
 
 var students = $('.student-item'); // Every student in the page. Used to first page load.
-var paginationArea = document.querySelector('.pagination'); // Used to first page load.
+var paginationArea = $('.pagination'); // Used to first page load.
 
 function loadsPage() { //Loads index page
   for(var i = 10; i < students.length; i++){ // This for just hide everyone on the page, but the first 10 students, using the student-iten class
-    students[i].style.display = 'none';  // Chages the CSS prop 'display' to none
+    students[i].style.display = 'none';  // Changes the CSS prop 'display' to none
   }
 //  var paginationArea = $('.page-header h2::after');
 
@@ -27,13 +27,14 @@ function appendPageLinks(listOfStudents) { /* take a student list as an argument
   }
   html += '</ul>'; // ends paginationArea string
 
-  paginationArea.innerHTML = html; //inserts the pagination to the html.
+  paginationArea.html(html); //inserts the pagination to the html.
 
-  $('.pagination a').click(function(){ //listens to clicks on the pagination area
+  $('.pagination a').click(function(e){ //listens to clicks on the pagination area
 
     $('.active').removeClass('active'); //Removes every link that has the active class
     $(this).addClass('active'); //Adds the active class to the link clicked
-    showPage(this.text(), listOfStudents); //Calls showPage() that print accordingly to the link
+
+    showPage($(this).text(), listOfStudents); //Calls showPage() that print accordingly to the link
 
   })
 };
