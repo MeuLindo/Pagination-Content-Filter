@@ -1,45 +1,45 @@
 //Pagination & Content Filter
 
-
-const students = $('.student-item'); // Every student in the page. Used to first page load.
-const paginationArea = $('.pagination'); // Used to first page load.
-const searchArea = $('.student-search');
+const students = $('.student-item'); // Every student in the page
+const paginationArea = $('.pagination'); // Grabs the html for paginationArea
+const searchArea = $('.student-search'); // Grabs the html for searchArea
 
 function changeVisibility(list, goal) {
-  for(let i = 0; i < list.length; i++){ // This for just hide everyone on the page, but the first 10 students, using the student-iten class
-    students[i].style.display = goal;  // Changes the CSS prop 'display' to none
+  for(let i = 0; i < list.length; i++){ // Loops over given list
+    students[i].style.display = goal;  // Sets display as string passed to the function
   }
 
 };
 
-
-function loadsPage() { //Loads index page
-  for(let i = 10; i < students.length; i++){ // This for just hide everyone on the page, but the first 10 students, using the student-iten class
+function loadsPage() { //Loads behaviour
+  for(let i = 10; i < students.length; i++){ // This hide everyone on the page, but the first 10 students
     students[i].style.display = 'none';  // Changes the CSS prop 'display' to none
   }
 
-  appendPageLinks(students); //Create the pagination links for all the students
+  appendPageLinks(students); //Create the pagination links for all students
   searchList(); // Loads the searchbox
-
+  $('.pagination a:first-child').addClass('active');
 };
 
-function appendPageLinks(listOfStudents) { /* take a student list as an argument */
-  var numberOfPages = Math.ceil(listOfStudents.length/10); // determine how many pages for this student list
-  var html = '<ul>'; // create a page link section
+function appendPageLinks(listOfStudents) { // Deals with paginagionArea
 
-  for(var i = 1 ; i< numberOfPages + 1 ; i++){  // “for” every page add a page link to the page link section
+  const numberOfPages = Math.ceil(listOfStudents.length/10); // determine how many pages for this student list
+  let html = '<ul>'; // create a page link section
+
+  for(let i = 1 ; i< numberOfPages + 1 ; i++){  // “for” every page add a page link to the page link section
     html += '<li><a href="#">' + i + '</a></li>';
   }
   html += '</ul>'; // ends paginationArea string
 
+  // $('.pagination a:first-child').addClass('active'); //Adds the active class to the link clicked;
   paginationArea.html(html); //inserts the pagination to the html.
 
   $('.pagination a').click(function(e){ //listens to clicks on the pagination area
-
-    $('.active').removeClass('active'); //Removes every link that has the active class
-    $(this).addClass('active'); //Adds the active class to the link clicked
-
+    debugger;
+    $(this).toggleClass('active'); //Removes every link that has the active class
     showPage($(this).text(), listOfStudents); //Calls showPage() that print accordingly to the link
+
+
 
   })
 };
@@ -73,7 +73,6 @@ function searchList() { //Rearange the students based on user query
   searchArea.html(searchBox); //inserts the searchArea to the html.
 
   $('button').click(function(){ //listens to html button
-          //debugger;
     var studentSearched = $('input').val(); // Search text input
     var studentsFound = []; // array for the students found
 
@@ -110,4 +109,4 @@ function searchList() { //Rearange the students based on user query
 
 };
 
-loadsPage(); //Loads index page
+loadsPage(); //Loads behaviour
