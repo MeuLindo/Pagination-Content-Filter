@@ -18,7 +18,7 @@ function loadsPage() { //Loads behaviour
 
   appendPageLinks(students); //Create the pagination links for all students
   searchList(); // Loads the searchbox
-  $('.pagination a:first-child').addClass('active');
+  $('.pagination li:first-child a').addClass('active'); //Adds the active class to the link clicked;
 };
 
 function appendPageLinks(listOfStudents) { // Deals with paginagionArea
@@ -31,11 +31,10 @@ function appendPageLinks(listOfStudents) { // Deals with paginagionArea
   }
   html += '</ul>'; // ends paginationArea string
 
-  // $('.pagination a:first-child').addClass('active'); //Adds the active class to the link clicked;
+
   paginationArea.html(html); //inserts the pagination to the html.
 
   $('.pagination a').click(function(e){ //listens to clicks on the pagination area
-    debugger;
     $(this).toggleClass('active'); //Removes every link that has the active class
     showPage($(this).text(), listOfStudents); //Calls showPage() that print accordingly to the link
 
@@ -77,8 +76,7 @@ function searchList() { //Rearange the students based on user query
     var studentsFound = []; // array for the students found
 
     if(studentSearched === ''){ // makes sure nothing happens if button is pressed with an empty input and refreshed previous searches
-      changeVisibility(students,'');
-      loadsPage(); // Just refreshes the page if no one is found
+       
     }
     else{
       $('.pagination a').remove(); // Remove pagination, so we can create the new one with the size of the results
