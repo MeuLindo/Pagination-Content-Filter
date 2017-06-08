@@ -18,51 +18,38 @@ function loadsPage() { //Loads behaviour
 
   appendPageLinks(students); //Create the pagination links for all students
   searchList(); // Loads the searchbox
-  $('.pagination li:first-child a').addClass('active'); //Adds the active class to the link clicked;
+  $('.pagination a:first').addClass('active'); //Adds the active class to the link clicked;
 };
 
 function appendPageLinks(listOfStudents) { // Deals with paginagionArea
 
   const numberOfPages = Math.ceil(listOfStudents.length/10); // determine how many pages for this student list
-  let html = '<ul>'; // create a page link section
 
-  for(let i = 1 ; i< numberOfPages + 1 ; i++){  // “for” every page add a page link to the page link section
-    html += '<li><a href="#">' + i + '</a></li>';
+  paginationArea.append('<ul>');
+
+  for(let i = 1 ; i < numberOfPages + 1 ; i++){  // “for” every page add a page link to the page link section
+    $('.pagination ul').append(`<li><a href="#">${i}</a></li>`);
   }
-  html += '</ul>'; // ends paginationArea string
 
-
-  paginationArea.html(html); //inserts the pagination to the html.
-
-  $('.pagination a').click(function(e){ //listens to clicks on the pagination area
-    $(this).toggleClass('active'); //Removes every link that has the active class
+  $('.pagination a').on('click', function(){ //listens to clicks on the pagination area
+    $('a').removeClass("active"); //Removes every link that has the active class
+    $(this).addClass("active"); //Adds the class to clicked
     showPage($(this).text(), listOfStudents); //Calls showPage() that print accordingly to the link
-
-
-
   })
+
 };
 
 function showPage(pageNumber, listOfStudents){ //recieves the link clicked and a list of all the students
 
-  var superiorLimit = pageNumber*10; // The math to position the students to be selected
-  var inferiorLimit = superiorLimit - 10;
+  changeVisibility(students, 'none');
 
-  for(var i = 0; i < students.length; i++){ // This for just hide everyone on the page using th stunde-iten class
+  for(let i = (pageNumber * 10) , j = (pageNumber * 10) - 10 ; i > j ; j++){ // This for display the students on the passed studentsList
+  //  debugger;
+     if(!listOfStudents[j]){} // Makes sure the loop skips the complement of 10. Meaning if there is 6 students we wont try to access the other 4 elements that doensnt existe in the array.
 
-    students[i].style.display = 'none';
-
-  }
-
-  for( ; superiorLimit > inferiorLimit; superiorLimit--){ // This for display the students on the passed studentsList
-
-     if(!listOfStudents[superiorLimit]){} // Makes sure the loop skips the complement of 10. Meaning if there is 6 students we wont try to access the other 4 elements that doensnt existe in the array.
-
-     else listOfStudents[superiorLimit].style.display = 'block'; // Display the students
+     else listOfStudents[j].style.display = 'block'; // Display the students
 
    }
-  if (pageNumber === 1){} // if page number = 1 we dont need to show the paginationArea
-  else appendPageLinks(listOfStudents); // create the paginationArea
 
 };
 
@@ -76,7 +63,7 @@ function searchList() { //Rearange the students based on user query
     var studentsFound = []; // array for the students found
 
     if(studentSearched === ''){ // makes sure nothing happens if button is pressed with an empty input and refreshed previous searches
-       
+
     }
     else{
       $('.pagination a').remove(); // Remove pagination, so we can create the new one with the size of the results
@@ -90,8 +77,8 @@ function searchList() { //Rearange the students based on user query
 
       if(!studentsFound.length) { //sends a message to the user that no one was found
         alert('No one found :(');
-        changeVisibility(students,'hide');
-        loadsPage(); // Just refreshes the page if no one is found
+        //        debugger;
+        // appendPageLinks(students);// Just refreshes the page if no one is found
       }
       else if(studentsFound.length > 10){ //checks if we need pages
         appendPageLinks(studentsFound);
